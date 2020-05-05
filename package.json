@@ -4,6 +4,7 @@
   "description": "makeway project",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +18,10 @@
   },
   "homepage": "https://github.com/sckimynwa/MakeWay#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "@types/express": "^4.17.6",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "multer": "^1.4.2",
+    "tesseract.js": "^2.1.1"
   }
 }
