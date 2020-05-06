@@ -2,12 +2,11 @@ const express = require('express');
 const app = express();
 
 const port = 3000;
-const staticUrl = '/Users/sangchulkim/Desktop/Project/MakeWay/assets';
+// 나중에 static url은 사용자의 diskurl로 수정.
+const staticUrl = '/Users/sangchulkim/Desktop/Project/MakeWay/public';
+const staticImgurl = 'http://localhost:3000/public/img.png';
 
 const Tesseract = require('tesseract.js');
-const bodyParser = require('body-parser');
-const request = require('request');
-const fs = require('fs');
 
 const multer = require('multer');
 const upload = multer({ 
@@ -21,7 +20,8 @@ const upload = multer({
     })
 });
 
-app.use(express.static('uploads'));
+// middlewares
+app.use('/public', express.static('public'));
 
 // default route
 app.get('/', (req, res, next) => {
@@ -30,14 +30,13 @@ app.get('/', (req, res, next) => {
 
 // image to text
 app.post('/image', upload.single('img'), (req, res, next) => {
-    
-    Tesseract.recognize(
-        staticUrl+'/img.png',
-      ).then(({ data: { text } }) => {
-        res.send(text);
-      });
+    Tesseract.recognize(staticImgurl)
+        .then(({ data: { text } }) => {
+            res.send(text);
+        });
 });
 
+// server start
 app.listen(port, () => {
     console.log(`Server is Running at ${port}`);
 });
