@@ -30,7 +30,7 @@ app.get('/', (req, res, next) => {
 
 // image to text
 app.post('/image', upload.single('img'), (req, res, next) => {
-    Tesseract.recognize(staticImgurl)
+    Tesseract.recognize(staticImgurl, 'kor', 'eng')
         .then(({ data: { text } }) => {
             res.send(text);
         });
